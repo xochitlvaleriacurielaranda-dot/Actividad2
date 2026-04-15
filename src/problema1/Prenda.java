@@ -23,8 +23,20 @@ public class Prenda {
         this.costoProduccion=costoProduccion;
     }
     @Override
+    public boolean equals(Object 0){
+        if(this==0)return true;
+        if(!(0 instanceof Prenda)) return false;
+        Prenda prenda=(Prenda) 0;
+        return idPrenda==prenda.idPrenda; 
+    }
+    @Override
+    public int hashCode(){
+        return Objects.hashCode(idPrenda);
+    }
+    @Override
     public String toString(){
         return "Prenda{"+
+                 " idPrenda= '"+idPrenda+'\''+
                 " modelo= '"+modelo+'\''+
                 ", tela= '"+tela+'\''+
                 ", costoProduccion= "+costoProduccion+
