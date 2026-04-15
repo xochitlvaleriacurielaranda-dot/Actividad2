@@ -24,4 +24,22 @@ public class Venta {
     public double montoRecuperacionLote(){
         return (prenda.getCostoProduccion()*0.05)*lote.getNoPiezas();
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Venta)) return false;
+        Venta venta = (Venta) o;
+        return idVenta == venta.idVenta;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(idVenta);
+    }
+    public class Venta implements Comparable<Venta> {
+    private double monto;
+
+    @Override
+    public int compareTo(Venta otra) {
+        return Double.compare(this.monto, otra.monto);
+    }
 }
