@@ -19,15 +19,15 @@ public class Lote {
         if (this == o) return true;
         if (!(o instanceof Lote)) return false;
         Lote lote = (Lote) o;
-        return idLote == lote.idLote;
+        return noLote == lote.noLote;
     }
      @Override
     public int hashCode() {
-        return Objects.hash(idLote);
+        return Objects.hash(noLote);
     }
      @Override
     public int compareTo(Lote otro) {
-        return Integer.compare(this.prendas.size(), otro.prendas.size());
+        return Integer.compare(this.noPiezas, otro.noPiezas));
     }
     @Override
     public String toString(){
