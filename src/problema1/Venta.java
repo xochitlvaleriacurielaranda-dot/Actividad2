@@ -1,12 +1,12 @@
 package problema1;
 import java.util.Objects;
 public class Venta implements Comparable<Venta>{
-    private int idVenta
+    private int idVenta;
     private Prenda prenda;
     private Lote lote;
 
     public Venta(Prenda prenda, Lote lote, int idVenta){
-        this.idVenta=idVenta
+        this.idVenta=idVenta;
         this.prenda=prenda;
         this.lote= lote;
     }
