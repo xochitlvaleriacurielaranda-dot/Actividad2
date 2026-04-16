@@ -22,12 +22,16 @@ public class Prenda {
     public void setCostoProduccion(int costoProduccion){
         this.costoProduccion=costoProduccion;
     }
-    @Override
-    public boolean equals(Object 0){
-        if(this==0)return true;
-        if(!(0 instanceof Prenda)) return false;
-        Prenda prenda=(Prenda) 0;
-        return idPrenda==prenda.idPrenda; 
+   @Override
+   public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    Prenda prenda = (Prenda) obj;
+    return Double.compare(prenda.precio, precio) == 0 &&
+           nombre.equals(prenda.nombre) &&
+           material.equals(prenda.material) &&
+           genero.equals(prenda.genero) &&
+           temporada.equals(prenda.temporada);
     }
     @Override
     public int hashCode(){
