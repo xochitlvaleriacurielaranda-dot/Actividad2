@@ -43,3 +43,4 @@ public class Venta {
         return Double.compare(this.monto, otra.monto);
     }
 }
+}
