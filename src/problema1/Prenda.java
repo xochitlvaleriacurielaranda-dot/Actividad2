@@ -25,22 +25,21 @@ public class Prenda {
    @Override
    public boolean equals(Object obj) {
     if (this == obj) return true;
-    if (obj == null || getClass() != obj.getClass()) return false;
+     if (!(obj instanceof Prenda)) return false;
     Prenda prenda = (Prenda) obj;
-    return Double.compare(prenda.precio, precio) == 0 &&
-           nombre.equals(prenda.nombre) &&
-           material.equals(prenda.material) &&
+    return modelo.equals(prenda.modelo) &&
+           tela.equals(prenda.tela) &&
            genero.equals(prenda.genero) &&
-           temporada.equals(prenda.temporada);
+           temporada.equals(prenda.temporada) &&
+           costoProduccion == prenda.costoProduccion;
     }
     @Override
     public int hashCode(){
-        return Objects.hashCode(idPrenda);
+        return Objects.hashCode(modelo,tela,genero,temporada,costoProduccion);
     }
     @Override
     public String toString(){
         return "Prenda{"+
-                 " idPrenda= '"+idPrenda+'\''+
                 " modelo= '"+modelo+'\''+
                 ", tela= '"+tela+'\''+
                 ", costoProduccion= "+costoProduccion+
