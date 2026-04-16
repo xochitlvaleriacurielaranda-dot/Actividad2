@@ -27,7 +27,7 @@ public class Lote {
     }
      @Override
     public int compareTo(Lote otro) {
-        return Integer.compare(this.noPiezas, otro.noPiezas));
+        return Integer.compare(this.noPiezas, otro.noPiezas);
     }
     @Override
     public String toString(){
