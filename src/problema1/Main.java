@@ -1,23 +1,45 @@
 package problema1;
 
-import java.time.LocalDate;
-
 public class Main {
     public static void main(String[] args) {
-        Prenda prenda1 = new Prenda("Camisa","Algodón", 200, "Masculino", "Verano");
-        Prenda prenda2 = new Prenda("Camisa","Algodón", 200, "Masculino", "Verano");
-        Prenda prenda3 = new Prenda("Pantalón","Algodón", 500, "Femenino", "Otoño");
-        Lote lote = new Lote(101, 50, LocalDate.now());
+        try {
+            // Declaramos las prendas
+            Prenda camisa = new Prenda("Camisa", "Algodón", 150, "Unisex", "Verano");
+            Prenda pantalon = new Prenda("Pantalón", "Mezclilla", 300, "Masculino", "Invierno");
 
-        Venta venta = new Venta(1, prenda1, lote); // idVenta = 1
-        System.out.println(prenda1);
-        System.out.println(lote);
-        System.out.println("Precio por pieza: $" + venta.precioPorPrenda());
-        System.out.println("Precio por lote: $" + venta.precioPorLote());
-        System.out.println("Monto recuperación por prenda: $" + venta.montoRecuperacionPrenda());
-        System.out.println("Monto recuperación por lote: $" + venta.montoRecuperacionLote());
-        System.out.println(prenda1.equals(prenda2));
-        System.out.println(prenda1.equals(prenda3));
-        System.out.println(prenda1.hashCode() == prenda2.hashCode());
+            // generamosun lote a cada prenda
+            Lote lote = new Lote();
+            lote.agregarPrenda(camisa);
+            lote.agregarPrenda(pantalon);
+
+            System.out.println("Número de prendas en el lote: " + lote.contarPrendas());
+            System.out.println("Costo total del lote: " + lote.calcularCostoTotal());
+
+            
+            Venta venta = new Venta(camisa, 2, 250.0);
+            System.out.println("Total de la venta: " + venta.calcularTotal());
+
+         
+            Venta otraVenta = new Venta(pantalon, 1, 400.0);
+            int comparacion = venta.compareTo(otraVenta);
+            if (comparacion < 0) {
+                System.out.println("La primera venta es menor que la segunda.");
+            } else if (comparacion > 0) {
+                System.out.println("La primera venta es mayor que la segunda.");
+            } else {
+                System.out.println("Ambas ventas son iguales en total.");
+            }
+
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error de argumento: " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.err.println("Error de referencia nula: " + e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println("Error de índice: " + e.getMessage());
+        } catch (IllegalStateException e) {
+            System.err.println("Error de estado: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error inesperado: " + e.getMessage());
+        }
     }
 }
