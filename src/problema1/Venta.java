@@ -1,52 +1,82 @@
 package problema1;
+
 import java.util.Objects;
-public class Venta implements Comparable<Venta>{
-    private int idVenta;
+
+public class Venta implements Comparable<Venta> {
     private Prenda prenda;
-    private Lote lote;
+    private int cantidad;
+    private double precioUnitario;
 
-    public Venta(Prenda prenda, Lote lote, int idVenta){
-        this.idVenta=idVenta;
-        this.prenda=prenda;
-        this.lote= lote;
+    public Venta(Prenda prenda, int cantidad, double precioUnitario) {
+        if (prenda == null) {
+            throw new NullPointerException("La prenda de la venta no puede ser nula");
+        }
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException("La cantidad debe ser mayor que cero");
+        }
+        if (precioUnitario <= 0) {
+            throw new IllegalArgumentException("El precio unitario debe ser mayor que cero");
+        }
+
+        this.prenda = prenda;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
     }
 
-    public double precioPorPrenda(){
-        return prenda.getCostoProduccion()*1.15;
+    public Prenda getPrenda() {
+        return prenda;
     }
 
-    public double precioPorLote(){
-        return (prenda.getCostoProduccion()*1.05)* lote.getNoPiezas();
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public double montoRecuperacionPrenda(){
-        return prenda.getCostoProduccion()*0.15;
+    public void setCantidad(int cantidad) {
+        if (cantidad <= 0) {
+            throw new IllegalArgumentException("La cantidad debe ser mayor que cero");
+        }
+        this.cantidad = cantidad;
     }
 
-    public double montoRecuperacionLote(){
-        return (prenda.getCostoProduccion()*0.05)*lote.getNoPiezas();
+    public double getPrecioUnitario() {
+        return precioUnitario;
     }
+
+    public void setPrecioUnitario(double precioUnitario) {
+        if (precioUnitario <= 0) {
+            throw new IllegalArgumentException("El precio unitario debe ser mayor que cero");
+        }
+        this.precioUnitario = precioUnitario;
+    }
+
+    public double calcularTotal() {
+        if (cantidad <= 0) {
+            throw new IllegalStateException("No se puede calcular el total con cantidad inválida");
+        }
+        return cantidad * precioUnitario;
+    }
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Venta)) return false;
-        Venta venta = (Venta) o;
-        return idVenta == venta.idVenta;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Venta)) return false;
+        Venta venta = (Venta) obj;
+        return cantidad == venta.cantidad &&
+               Double.compare(venta.precioUnitario, precioUnitario) == 0 &&
+               Objects.equals(prenda, venta.prenda);
     }
+
     @Override
     public int hashCode() {
-        return Objects.hash(idVenta);
+        return Objects.hash(prenda, cantidad, precioUnitario);
     }
+
     @Override
     public int compareTo(Venta otra) {
-        return Double.compare(this.precioPorLote(), otra.precioPorLote());
-    }
-    @Override
-    public String toString() {
-        return "Venta{" +
-               "idVenta=" + idVenta +
-               ", prenda=" + prenda +
-               ", lote=" + lote +
-               '}';
+        if (otra == null) {
+            throw new NullPointerException("No se puede comparar con una venta nula");
+        }
+        // Comparación por el total de la venta
+        return Double.compare(this.calcularTotal(), otra.calcularTotal());
     }
 }
